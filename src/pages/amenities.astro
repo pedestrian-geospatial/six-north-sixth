@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const buildingFeatures = [
   'Individual private storage unit in the basement for each condo',
   '24/7 secure access via front lobby (keypad/key fob entry)',
@@ -33,7 +35,7 @@ const hoaTags = [
       alt="Lobby of 6 North 6th Street with abstract artwork, a leather bench, and floor-to-ceiling glass doors opening onto 6th Street"
       class="absolute inset-0 h-full w-full object-cover"
       loading="eager"
-      src="/images/2609763_P01_1777781486515-CYC7buU8.webp"
+      src={`${base}images/2609763_P01_1777781486515-CYC7buU8.webp`}
     />
     <div class="absolute inset-0 bg-background/70"></div>
     <div class="relative z-10 mx-auto max-w-3xl">

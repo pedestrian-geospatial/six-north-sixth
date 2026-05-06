@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const unitMix = [
   { type: '1 BR', size: '~986 sq ft', layout: '1 bedroom, 1.5 bath' },
   { type: '2 BR standard', size: '~1,200–1,243 sq ft', layout: '2 bedroom, 2 bath' },
@@ -37,7 +39,7 @@ const hoaIncludes = [
       <img
         alt="6 North 6th Street, exterior showing the 1914 brick masonry and 'Printers Publishers' historic ghost sign"
         class="mb-12 aspect-[4/3] w-full object-cover"
-        src="/images/8dd8b7353260855ea659cf9ecddaa42el-m1650825609rd-w1280_h960_1777781486515-BBFvMr2Z.webp"
+        src={`${base}images/8dd8b7353260855ea659cf9ecddaa42el-m1650825609rd-w1280_h960_1777781486515-BBFvMr2Z.webp`}
       />
 
       <p class="text-xl leading-relaxed text-muted-foreground">
@@ -61,7 +63,7 @@ const hoaIncludes = [
         <img
           alt="A historic photograph of downtown Richmond's commercial core in the early 1900s, showing an ornate early-skyscraper office building with Model T automobiles parked at the curb."
           class="w-full bg-primary"
-          src="/images/historic_1-Cb4GWGfN.webp"
+          src={`${base}images/historic_1-Cb4GWGfN.webp`}
         />
         <figcaption class="mt-3 text-xs tracking-wide text-muted-foreground italic">
           Downtown Richmond's commercial core in the early 1900s — the era in which 6 North 6th
@@ -78,7 +80,7 @@ const hoaIncludes = [
             <img
               alt="The front facade of 6 North 6th Street with awnings, the '6 North 6' wall plaque, and the street-front entrance."
               class="aspect-[4/3] w-full object-cover"
-              src="/images/8dd8b7353260855ea659cf9ecddaa42el-m2025928477rd-w1280_h960_1777781486515-BWvBarVm.webp"
+              src={`${base}images/8dd8b7353260855ea659cf9ecddaa42el-m2025928477rd-w1280_h960_1777781486515-BWvBarVm.webp`}
             />
             <figcaption
               class="mt-3 border-t border-accent pt-2 text-xs tracking-wide text-muted-foreground italic"
@@ -90,7 +92,7 @@ const hoaIncludes = [
             <img
               alt="A street-level view looking down 6th Street past the building's awnings and stone columns toward the downtown Richmond skyline."
               class="aspect-[4/3] w-full object-cover"
-              src="/images/6n6_1778034429152-DgsXALRr.webp"
+              src={`${base}images/6n6_1778034429152-DgsXALRr.webp`}
             />
             <figcaption
               class="mt-3 border-t border-accent pt-2 text-xs tracking-wide text-muted-foreground italic"
@@ -104,7 +106,7 @@ const hoaIncludes = [
       <img
         alt="The lobby at 6 North 6th Street, with high ceilings, modern lighting, and a contemporary art installation"
         class="my-12 aspect-[16/9] w-full object-cover"
-        src="/images/2609763_P01_1777781486515-CYC7buU8.webp"
+        src={`${base}images/2609763_P01_1777781486515-CYC7buU8.webp`}
       />
 
       <h2 class="font-serif text-3xl text-primary">The 2006 Conversion</h2>

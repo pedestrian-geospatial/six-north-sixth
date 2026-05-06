@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const distances = [
   { name: 'Sefton Coffee', time: '2 min' },
   { name: 'Virginia State Capitol', time: '3 min' },
@@ -48,7 +50,7 @@ const hoaIncludes = [
       alt="Sidewalk view of 6 North 6th Street with awnings and downtown Richmond skyline"
       class="absolute inset-0 h-full w-full object-cover"
       loading="eager"
-      src="/images/6n6_1778034429152-DgsXALRr.webp"
+      src={`${base}images/6n6_1778034429152-DgsXALRr.webp`}
     />
     <div class="absolute inset-0 bg-background/70"></div>
     <div class="relative z-10 mx-auto max-w-3xl">
@@ -60,7 +62,7 @@ const hoaIncludes = [
         major academic medical center, and several Fortune 500 corporate headquarters.
       </p>
       <a
-        href="/6N6_Buyer_Info_Sheet.pdf"
+        href={`${base}6N6_Buyer_Info_Sheet.pdf`}
         target="_blank"
         rel="noopener noreferrer"
         download
