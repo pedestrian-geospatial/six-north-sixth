@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const unitMix = [
+  { type: '1 BR', size: '~986 sq ft', layout: '1 bedroom, 1.5 bath' },
+  { type: '2 BR standard', size: '~1,200–1,243 sq ft', layout: '2 bedroom, 2 bath' },
+  { type: '2 BR top-floor', size: '1,258 sq ft', layout: 'Largest floor plan in building' },
+];
+
+const conversionHallmarks = [
+  'Preservation of historic architectural details and proportions',
+  'Modern systems (elevator, secure key-fob entry, fire alarm monitoring)',
+  'High ceilings carried over from the original building (some units retain 11-foot ceilings)',
+  'Large windows preserved on multiple exposures',
+  'Individual basement storage for each unit',
+];
+
+const hoaIncludes = [
+  'Water, gas, sewer, and trash',
+  'Internet and telephone service',
+  'Building liability insurance',
+  'Property management',
+  'Common-area maintenance and cleaning',
+  'Fire alarm monitoring',
+  'Elevator maintenance',
+];
+---
+
+<Layout
+  title="About the Building"
+  description="History, unit mix, and features of 6 North 6th Street, a 21-unit condominium in Richmond, VA."
+>
+  <div class="bg-background py-16 md:py-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h1 class="mb-8 font-serif text-4xl text-primary md:text-5xl">The Building</h1>
+
+      <img
+        alt="6 North 6th Street, exterior showing the 1914 brick masonry and 'Printers Publishers' historic ghost sign"
+        class="mb-12 aspect-[4/3] w-full object-cover"
+        src="/images/8dd8b7353260855ea659cf9ecddaa42el-m1650825609rd-w1280_h960_1777781486515-BBFvMr2Z.webp"
+      />
+
+      <p class="text-xl leading-relaxed text-muted-foreground">
+        6 North 6th Street is a five-story brick building constructed in 1914 in the heart of what
+        is now Richmond's Financial District. After serving in commercial use for most of the
+        20th century, the building was completely renovated in 2006 and converted into 21
+        residential condominium units.
+      </p>
+
+      <h2 class="mt-12 font-serif text-3xl text-primary">Era and Context: Richmond in 1914</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        1914 was a pivotal year for Richmond. The Federal Reserve Bank of Richmond was established
+        the same year — one of the original 12 Federal Reserve Banks. Richmond's downtown was a
+        major commercial center for the Mid-Atlantic, with banking, tobacco, and railroad
+        industries driving construction of multi-story commercial buildings. The building's
+        location at 6th and Grace/Main sat at the edge of what became the city's banking and
+        financial corridor.
+      </p>
+
+      <figure class="my-12">
+        <img
+          alt="A historic photograph of downtown Richmond's commercial core in the early 1900s, showing an ornate early-skyscraper office building with Model T automobiles parked at the curb."
+          class="w-full bg-primary"
+          src="/images/historic_1-Cb4GWGfN.webp"
+        />
+        <figcaption class="mt-3 text-xs tracking-wide text-muted-foreground italic">
+          Downtown Richmond's commercial core in the early 1900s — the era in which 6 North 6th
+          Street was built.
+        </figcaption>
+      </figure>
+
+      <section class="my-12">
+        <h3 class="mb-4 text-xs font-semibold tracking-[0.2em] text-accent uppercase">
+          Exterior Today
+        </h3>
+        <div class="grid gap-6 md:grid-cols-2">
+          <figure>
+            <img
+              alt="The front facade of 6 North 6th Street with awnings, the '6 North 6' wall plaque, and the street-front entrance."
+              class="aspect-[4/3] w-full object-cover"
+              src="/images/8dd8b7353260855ea659cf9ecddaa42el-m2025928477rd-w1280_h960_1777781486515-BWvBarVm.webp"
+            />
+            <figcaption
+              class="mt-3 border-t border-accent pt-2 text-xs tracking-wide text-muted-foreground italic"
+            >
+              Front entrance and "6 North 6" wall plaque.
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              alt="A street-level view looking down 6th Street past the building's awnings and stone columns toward the downtown Richmond skyline."
+              class="aspect-[4/3] w-full object-cover"
+              src="/images/6n6_1778034429152-DgsXALRr.webp"
+            />
+            <figcaption
+              class="mt-3 border-t border-accent pt-2 text-xs tracking-wide text-muted-foreground italic"
+            >
+              Looking down 6th Street toward the downtown skyline.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <img
+        alt="The lobby at 6 North 6th Street, with high ceilings, modern lighting, and a contemporary art installation"
+        class="my-12 aspect-[16/9] w-full object-cover"
+        src="/images/2609763_P01_1777781486515-CYC7buU8.webp"
+      />
+
+      <h2 class="font-serif text-3xl text-primary">The 2006 Conversion</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        In 2006 the building underwent a full renovation, transforming the original
+        commercial/office structure into 21 residential condominiums. Hallmarks of the conversion
+        that remain today:
+      </p>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
+        {conversionHallmarks.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2 class="mt-12 font-serif text-3xl text-primary">Unit Finishes</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        While each unit has unique characteristics, typical finishes include hardwood floors in
+        living areas, tile floors at entry and kitchen, granite countertops, stainless steel
+        appliances, and custom cabinets. Many units feature recessed lighting, electric or gas
+        fireplaces, walk-in closets in primary bedrooms, double vanities and soaking tubs, and
+        stackable in-unit washer/dryers.
+      </p>
+
+      <h2 class="mt-12 font-serif text-3xl text-primary">Unit Mix</h2>
+      <div class="my-8 overflow-auto border border-border">
+        <table class="w-full text-sm">
+          <thead class="bg-secondary/50">
+            <tr class="border-b border-border">
+              <th class="h-10 px-2 text-left font-semibold text-primary">Type</th>
+              <th class="h-10 px-2 text-left font-semibold text-primary">Approximate Size</th>
+              <th class="h-10 px-2 text-left font-semibold text-primary">Layout</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              unitMix.map((u) => (
+                <tr class="border-b border-border last:border-0">
+                  <td class="p-2 font-medium">{u.type}</td>
+                  <td class="p-2">{u.size}</td>
+                  <td class="p-2">{u.layout}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="mt-12 font-serif text-3xl text-primary">HOA Fee Includes</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">
+        The monthly HOA fee covers a generous list of services that would otherwise be paid
+        separately by each unit owner:
+      </p>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
+        {hoaIncludes.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="mt-4 text-sm text-muted-foreground italic">
+        Verify the current monthly fee with the management company.
+      </p>
+
+      <h2 class="mt-12 font-serif text-3xl text-primary">Pet &amp; Rental Policies</h2>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
+        <li>
+          <strong class="text-primary">Pets:</strong> Up to three pets (cats and dogs combined) per
+          unit.
+        </li>
+        <li>
+          <strong class="text-primary">Rentals:</strong> A minimum three-month rental term applies;
+          short-term rentals are not permitted.
+        </li>
+      </ul>
+      <p class="mt-4 text-sm text-muted-foreground italic">
+        Always confirm with the current HOA documents.
+      </p>
+    </div>
+  </div>
+</Layout>

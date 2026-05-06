@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact"
+  description="Contact the board or management for 6 North 6th Street, a downtown Richmond condominium."
+>
+  <div class="bg-background py-16 md:py-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h1 class="mb-12 text-center font-serif text-4xl text-primary md:text-5xl">Contact</h1>
+      <p class="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
+        For sales inquiries, please reach out through your real estate agent. For HOA matters, the
+        board and management company contacts are below.
+      </p>
+
+      <div class="grid gap-12 md:grid-cols-2">
+        <div class="space-y-8">
+          <div>
+            <h2 class="mb-4 font-serif text-2xl text-primary">Board of Directors</h2>
+            <div class="border-l border-accent pl-4 text-muted-foreground">
+              <p>
+                <strong class="text-primary">Phyl Demetriou</strong><br />
+                HOA Board President
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="mb-4 font-serif text-2xl text-primary">Management Company</h2>
+            <div class="border-l border-accent pl-4 text-muted-foreground">
+              <p>
+                <strong class="text-primary">Amber Chadil</strong><br />
+                ACS West<br />
+                <a href="mailto:amber@acswest.org" class="text-primary hover:text-accent">
+                  amber@acswest.org
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="mb-4 font-serif text-2xl text-primary">Building Address</h2>
+            <address class="border-l border-accent pl-4 text-muted-foreground not-italic">
+              6 North 6th Street<br />Richmond, VA 23219
+            </address>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="mb-6 font-serif text-2xl text-primary">Send a Message</h2>
+          <p class="mb-6 text-sm text-muted-foreground">
+            Email
+            <a href="mailto:amber@acswest.org" class="text-primary hover:text-accent">
+              amber@acswest.org
+            </a>
+            directly, or use the form below to compose a message in your mail client.
+          </p>
+          <form
+            id="contact-form"
+            action="mailto:amber@acswest.org"
+            method="post"
+            enctype="text/plain"
+            class="space-y-4"
+          >
+            <div class="space-y-2">
+              <label for="name" class="text-sm font-medium">Name</label>
+              <input
+                id="name"
+                name="name"
+                required
+                class="flex h-9 w-full border border-input bg-background px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              />
+            </div>
+            <div class="space-y-2">
+              <label for="email" class="text-sm font-medium">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                class="flex h-9 w-full border border-input bg-background px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              />
+            </div>
+            <div class="space-y-2">
+              <label for="subject" class="text-sm font-medium">Subject</label>
+              <input
+                id="subject"
+                name="subject"
+                required
+                class="flex h-9 w-full border border-input bg-background px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              />
+            </div>
+            <div class="space-y-2">
+              <label for="message" class="text-sm font-medium">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                class="flex min-h-[120px] w-full border border-input bg-background px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="inline-flex min-h-9 w-full items-center justify-center border border-primary bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

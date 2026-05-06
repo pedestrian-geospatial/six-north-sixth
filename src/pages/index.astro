@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const stats = [
+  { value: '21', label: 'Condominium Units' },
+  { value: '97', label: 'Walk Score' },
+  { value: '1914', label: 'Built' },
+  { value: '2006', label: 'Renovated' },
+];
+
+const districts = [
+  {
+    title: 'Government & Civic',
+    body: 'The Virginia State Capitol, Richmond City Hall, and the Library of Virginia are a 3-minute walk.',
+  },
+  {
+    title: 'Major Employers',
+    body: 'Federal Reserve Bank, Dominion Energy HQ, Truist, and the VCU/MCV medical campus are all on foot.',
+  },
+  {
+    title: 'Dining & Cafés',
+    body: 'Sefton Coffee, Capital Ale House, Fall Line, BrickFire, and dozens more in a five-minute radius.',
+  },
+  {
+    title: 'Arts & Outdoors',
+    body: 'Dominion Energy Center, Altria Theater, Capitol Square, and the James River canal walk.',
+  },
+];
+
+const personas = [
+  {
+    role: 'For the professional',
+    quote:
+      'Walk to the Capitol, the Federal Reserve, Dominion, or your law firm. Skip the traffic, skip the parking deck, get coffee at Sefton on the way.',
+  },
+  {
+    role: 'For the medical resident',
+    quote:
+      'A 10-minute walk to the medical campus, a quiet residential building when you get home, and Capital Ale House waiting at the end of the on-call shift.',
+  },
+  {
+    role: 'For the empty-nester',
+    quote:
+      "Lock-and-leave urban living in a historic 1914 building, with the symphony, the ballet, the State Capitol, and the city's best restaurants all on foot. Parking decks for the car you'll barely use.",
+  },
+];
+---
+
+<Layout title="Everything downtown, within blocks">
+  <section
+    class="relative flex min-h-[90vh] items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8"
+  >
+    <img
+      alt="6 North 6th Street building exterior, downtown Richmond"
+      class="absolute inset-0 h-full w-full object-cover"
+      loading="eager"
+      src="/images/8dd8b7353260855ea659cf9ecddaa42el-m2025928477rd-w1280_h960_1777781486515-BWvBarVm.webp"
+    />
+    <div class="absolute inset-0 bg-background/70"></div>
+    <div class="relative z-10 mx-auto max-w-4xl">
+      <h2 class="mb-4 text-sm font-semibold tracking-[0.2em] text-accent uppercase">
+        6 North 6th Street
+      </h2>
+      <h1 class="mb-8 font-serif text-5xl leading-tight text-primary md:text-7xl lg:text-8xl">
+        Everything downtown,<br />
+        <span class="text-muted-foreground">within blocks.</span>
+      </h1>
+      <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-primary/80 md:text-xl">
+        6 North 6th Street is a 21-unit boutique condominium in the heart of downtown Richmond's
+        Financial District. Originally built in 1914 and renovated in 2006, the building offers
+        walk-everywhere convenience — Walk Score 97 — with the Virginia State Capitol, VCU Health,
+        the Federal Reserve, Dominion Energy, and the city's best restaurants and theaters all
+        within blocks.
+      </p>
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/for-buyers"
+          class="inline-flex min-h-10 items-center justify-center border border-primary bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          For Buyers &amp; Agents
+        </a>
+        <a
+          href="https://home.acswest.org/public"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-10 items-center justify-center border border-primary px-8 text-sm font-medium text-primary transition-colors hover:bg-secondary"
+        >
+          Resident Portal
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-border bg-secondary/50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+        {
+          stats.map((stat) => (
+            <div class="text-center">
+              <p class="font-serif text-4xl text-primary md:text-5xl">{stat.value}</p>
+              <p class="mt-2 text-sm tracking-wide text-muted-foreground uppercase">
+                {stat.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <img
+        alt="6 North 6th Street street-level view, with the building's awnings, stone columns, and downtown Richmond sidewalk"
+        class="aspect-[21/9] w-full object-cover"
+        src="/images/6n6_1778034429152-DgsXALRr.webp"
+      />
+    </div>
+  </section>
+
+  <section class="border-t border-border bg-secondary/40 py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="text-sm font-semibold tracking-[0.2em] text-accent uppercase">
+          The Neighborhood
+        </h2>
+        <p class="mt-3 font-serif text-3xl text-primary md:text-4xl">
+          Everything downtown, within blocks.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {
+          districts.map((d) => (
+            <div class="border border-border bg-card p-6">
+              <h3 class="font-serif text-xl text-primary">{d.title}</h3>
+              <p class="mt-3 text-sm text-muted-foreground">{d.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-12 text-center">
+        <a
+          href="/neighborhood"
+          class="inline-flex min-h-9 items-center justify-center border border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-secondary"
+        >
+          Explore the Neighborhood Map
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-16 text-center font-serif text-4xl text-primary md:text-5xl">
+        What's it like to live here?
+      </h2>
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+        {
+          personas.map((p) => (
+            <div class="space-y-4">
+              <h3 class="text-sm font-semibold tracking-wide text-accent uppercase">{p.role}</h3>
+              <p class="leading-relaxed text-muted-foreground">"{p.quote}"</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

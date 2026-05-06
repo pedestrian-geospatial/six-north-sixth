@@ -1,0 +1,379 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { categories, amenities, buildingAnchor } from '../data/neighborhood';
+
+const grouped = categories.map((cat) => ({
+  ...cat,
+  items: amenities.features.filter((f) => f.properties.cat === cat.id),
+}));
+
+const mapData = { categories, amenities, anchor: buildingAnchor };
+---
+
+<Layout
+  title="Neighborhood"
+  description="Explore the downtown Richmond Financial District around 6 North 6th Street."
+>
+  <div class="bg-background pb-16">
+    <div class="w-full border-b border-border bg-secondary/30">
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <h1 class="mb-2 font-serif text-3xl text-primary md:text-4xl">The Neighborhood</h1>
+        <p class="mb-8 text-muted-foreground">
+          Walk Score 97 · Financial District · Downtown Richmond
+        </p>
+        <div id="category-toggles" class="mb-6 flex flex-wrap items-center gap-2">
+          {
+            categories.map((cat) => (
+              <button
+                type="button"
+                data-cat={cat.id}
+                data-color={cat.color}
+                class="rounded-full border border-transparent px-3 py-1 text-xs font-medium text-primary-foreground transition-colors"
+                style={`background-color: ${cat.color};`}
+                aria-pressed="true"
+              >
+                {cat.label}
+              </button>
+            ))
+          }
+          <button
+            id="clear-filters"
+            type="button"
+            hidden
+            class="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary"
+          >
+            Clear filters ✕
+          </button>
+        </div>
+        <div
+          id="map"
+          class="z-0 h-[500px] w-full overflow-hidden border border-border md:h-[600px]"
+        >
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 class="mb-3 text-center font-serif text-3xl text-primary">
+        Everything Within Walking Distance
+      </h2>
+      <p class="mx-auto mb-12 max-w-2xl text-center text-sm text-muted-foreground">
+        Every place plotted on the map above, grouped by category.
+      </p>
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          grouped.map((cat) => (
+            <div class="border border-border bg-card p-6">
+              <div class="mb-4 flex items-center gap-3 border-b border-border pb-3">
+                <span
+                  aria-hidden="true"
+                  class="inline-block h-2.5 w-2.5 rounded-full"
+                  style={`background-color: ${cat.color};`}
+                />
+                <h3 class="font-serif text-xl text-primary">{cat.label}</h3>
+                <span class="ml-auto text-xs text-muted-foreground">{cat.items.length}</span>
+              </div>
+              <ul class="space-y-3 text-sm text-muted-foreground">
+                {cat.items.map((f) => (
+                  <li>
+                    <strong class="block text-primary">{f.properties.name}</strong>
+                    <span class="text-xs">{f.properties.addr}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <style is:global>
+    .maplibregl-popup-content {
+      padding: 14px 44px 14px 16px;
+      min-width: 160px;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      line-height: 1.4;
+    }
+    .maplibregl-popup-close-button {
+      width: 28px;
+      height: 28px;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0;
+      top: 4px;
+      right: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      color: var(--color-muted-foreground);
+    }
+    .maplibregl-popup-close-button:hover {
+      background: var(--color-secondary);
+      color: var(--color-primary);
+    }
+    .maplibregl-popup.ring-tip .maplibregl-popup-content {
+      padding: 4px 8px;
+      min-width: 0;
+      font-size: 0.75rem;
+      line-height: 1.2;
+      pointer-events: none;
+    }
+  </style>
+
+  <script type="application/json" id="map-data" set:html={JSON.stringify(mapData)} />
+
+  <script>
+    import maplibregl, { type ExpressionSpecification } from 'maplibre-gl';
+    import 'maplibre-gl/dist/maplibre-gl.css';
+    import type { AmenityCollection, Category } from '../data/neighborhood';
+
+    const dataEl = document.getElementById('map-data');
+    if (dataEl) {
+      const { categories, amenities, anchor } = JSON.parse(dataEl.textContent || '{}') as {
+        categories: Category[];
+        amenities: AmenityCollection;
+        anchor: { lat: number; lng: number };
+      };
+
+      const allIds = categories.map((c) => c.id);
+      let active = new Set<string>(allIds);
+      const isDefault = () => active.size === allIds.length;
+
+      const map = new maplibregl.Map({
+        container: 'map',
+        style: 'https://api.protomaps.com/styles/v4/light/en.json?key=f7fbdad5ae878ab5',
+        center: [anchor.lng, anchor.lat],
+        zoom: 15.5,
+      });
+
+      map.addControl(new maplibregl.NavigationControl(), 'top-right');
+      map.addControl(new maplibregl.GeolocateControl(), 'top-right');
+      map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+
+      // Color expression: match cat → category color, fallback to dark gray
+      const colorByCat = [
+        'match',
+        ['get', 'cat'],
+        ...categories.flatMap((c) => [c.id, c.color]),
+        '#3A3A3A',
+      ] as ExpressionSpecification;
+
+      map.on('load', () => {
+        // Walking radius rings (400m ≈ 5 min, 800m ≈ 10 min walk).
+        // Two layers per ring: visible dashed line + invisible wider line for hover hit-testing.
+        map.addSource('rings', {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              geoCircle([anchor.lng, anchor.lat], 400, '~5 min walk'),
+              geoCircle([anchor.lng, anchor.lat], 800, '~10 min walk'),
+            ],
+          },
+        });
+        map.addLayer({
+          id: 'rings',
+          type: 'line',
+          source: 'rings',
+          paint: {
+            'line-color': '#6B5A2F',
+            'line-width': 1,
+            'line-dasharray': [3, 3],
+            'line-opacity': 0.8,
+          },
+        });
+        map.addLayer({
+          id: 'rings-hover',
+          type: 'line',
+          source: 'rings',
+          paint: {
+            'line-color': '#000',
+            'line-width': 18,
+            'line-opacity': 0.001,
+          },
+        });
+        let ringTip: maplibregl.Popup | null = null;
+        const showRingTip = (e: maplibregl.MapLayerMouseEvent) => {
+          const f = e.features?.[0];
+          if (!f) return;
+          map.getCanvas().style.cursor = 'help';
+          const html = `<span style="font-size:0.75rem;font-weight:500;">${f.properties?.label ?? ''}</span>`;
+          if (ringTip) {
+            ringTip.setLngLat(e.lngLat).setHTML(html);
+          } else {
+            ringTip = new maplibregl.Popup({
+              closeButton: false,
+              closeOnClick: false,
+              offset: 12,
+              className: 'ring-tip',
+            })
+              .setLngLat(e.lngLat)
+              .setHTML(html)
+              .addTo(map);
+          }
+        };
+        const hideRingTip = () => {
+          map.getCanvas().style.cursor = '';
+          ringTip?.remove();
+          ringTip = null;
+        };
+        map.on('mouseenter', 'rings-hover', showRingTip);
+        map.on('mousemove', 'rings-hover', showRingTip);
+        map.on('mouseleave', 'rings-hover', hideRingTip);
+
+        // Render every feature as a point at its centroid. Polygons stay in the
+        // source GeoJSON for future flexibility; this just collapses them visually.
+        const pointFeatures = amenities.features.map((f) => {
+          if (f.geometry.type === 'Point') return f;
+          let ring: [number, number][] = [];
+          if (f.geometry.type === 'Polygon') ring = f.geometry.coordinates[0];
+          else if (f.geometry.type === 'MultiPolygon')
+            ring = f.geometry.coordinates.flatMap((p) => p[0]);
+          const lng = ring.reduce((s, c) => s + c[0], 0) / ring.length;
+          const lat = ring.reduce((s, c) => s + c[1], 0) / ring.length;
+          return {
+            ...f,
+            geometry: { type: 'Point' as const, coordinates: [lng, lat] as [number, number] },
+          };
+        });
+        map.addSource('amenities', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: pointFeatures },
+          attribution:
+            '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+        });
+        map.addLayer({
+          id: 'amenities',
+          type: 'circle',
+          source: 'amenities',
+          paint: {
+            'circle-radius': 7,
+            'circle-color': colorByCat,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#F5F0E8',
+          },
+        });
+
+        // Building anchor: SVG pin with the "6N6" label
+        const anchorEl = document.createElement('div');
+        anchorEl.style.cssText = 'cursor:pointer;line-height:0;';
+        anchorEl.innerHTML = `
+          <svg width="36" height="48" viewBox="0 0 36 48" xmlns="http://www.w3.org/2000/svg" style="display:block;filter:drop-shadow(0 0 5px rgba(255,255,255,0.95)) drop-shadow(0 0 10px rgba(255,255,255,0.85)) drop-shadow(0 0 18px rgba(255,255,255,0.55)) drop-shadow(0 2px 3px rgba(0,0,0,0.35));">
+            <path d="M18 0 C27.94 0 36 8.06 36 18 C36 27.94 18 48 18 48 C18 48 0 27.94 0 18 C0 8.06 8.06 0 18 0 Z" fill="#000"/>
+            <text x="18" y="18" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="13">6N6</text>
+          </svg>
+        `;
+        new maplibregl.Marker({ element: anchorEl, anchor: 'bottom' })
+          .setLngLat([anchor.lng, anchor.lat])
+          .setPopup(
+            new maplibregl.Popup({ offset: 48 }).setHTML(
+              '<strong>6 North 6th Street</strong><br/>Richmond, VA 23219',
+            ),
+          )
+          .addTo(map);
+
+        map.on('click', 'amenities', (e) => {
+          const f = e.features?.[0];
+          if (!f || f.geometry.type !== 'Point') return;
+          const [lng, lat] = f.geometry.coordinates;
+          new maplibregl.Popup()
+            .setLngLat([lng, lat])
+            .setHTML(
+              `<strong>${f.properties?.name ?? ''}</strong><br/><span style="font-size:0.75rem;">${f.properties?.addr ?? ''}</span>`,
+            )
+            .addTo(map);
+        });
+        map.on('mouseenter', 'amenities', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'amenities', () => {
+          map.getCanvas().style.cursor = '';
+        });
+      });
+
+      // Filter state model:
+      //  - "default" = all categories active (treated as no-filter on the map).
+      //  - Click while default → exclusive: select only that one.
+      //  - Click an active filter → remove it. If empty, snap back to default.
+      //  - Click an inactive filter → add it.
+      //  - Clear button → snap back to default (visible only when not default).
+      const filterBtns = Array.from(
+        document.querySelectorAll<HTMLButtonElement>('#category-toggles [data-cat]'),
+      );
+      const clearBtn = document.getElementById('clear-filters') as HTMLButtonElement | null;
+
+      const render = () => {
+        for (const btn of filterBtns) {
+          const id = btn.dataset.cat!;
+          const isOn = active.has(id);
+          if (isOn) {
+            btn.style.backgroundColor = btn.dataset.color || '';
+            btn.style.color = '';
+            btn.style.opacity = '1';
+          } else {
+            btn.style.backgroundColor = 'var(--color-border)';
+            btn.style.color = 'var(--color-muted-foreground)';
+            btn.style.opacity = '0.6';
+          }
+          btn.setAttribute('aria-pressed', String(isOn));
+        }
+        if (map.getLayer('amenities')) {
+          map.setFilter(
+            'amenities',
+            isDefault() ? null : ['in', ['get', 'cat'], ['literal', [...active]]],
+          );
+        }
+        if (clearBtn) clearBtn.hidden = isDefault();
+      };
+
+      const handleFilterClick = (id: string) => {
+        if (isDefault()) {
+          active = new Set([id]);
+        } else if (active.has(id)) {
+          active.delete(id);
+          if (active.size === 0) active = new Set(allIds);
+        } else {
+          active.add(id);
+        }
+        render();
+      };
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => handleFilterClick(btn.dataset.cat!));
+      });
+      clearBtn?.addEventListener('click', () => {
+        active = new Set(allIds);
+        render();
+      });
+    }
+
+    // Generate a polygon approximating a circle of `radiusMeters` around `center` ([lng, lat]).
+    function geoCircle(
+      center: [number, number],
+      radiusMeters: number,
+      label: string,
+      points = 64,
+    ): GeoJSON.Feature<GeoJSON.Polygon> {
+      const earthRadius = 6371000;
+      const [lng, lat] = center;
+      const latRad = (lat * Math.PI) / 180;
+      const coords: [number, number][] = [];
+      for (let i = 0; i <= points; i++) {
+        const angle = (i / points) * 2 * Math.PI;
+        const dx = radiusMeters * Math.cos(angle);
+        const dy = radiusMeters * Math.sin(angle);
+        const dLat = ((dy / earthRadius) * 180) / Math.PI;
+        const dLng = ((dx / (earthRadius * Math.cos(latRad))) * 180) / Math.PI;
+        coords.push([lng + dLng, lat + dLat]);
+      }
+      return {
+        type: 'Feature',
+        properties: { label, radiusMeters },
+        geometry: { type: 'Polygon', coordinates: [coords] },
+      };
+    }
+  </script>
+</Layout>
