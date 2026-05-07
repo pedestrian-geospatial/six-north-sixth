@@ -5,7 +5,11 @@ const base = import.meta.env.BASE_URL;
 
 const stats = [
   { value: '21', label: 'Condominium Units' },
-  { value: '97', label: 'Walk Score' },
+  {
+    value: '96',
+    label: 'Walk Score',
+    href: 'https://www.walkscore.com/score/6-n-6th-st-richmond-va-23219',
+  },
   { value: '1914', label: 'Built' },
   { value: '2006', label: 'Renovated' },
 ];
@@ -70,7 +74,13 @@ const personas = [
       <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-primary/80 md:text-xl">
         6 North 6th Street is a 21-unit boutique condominium in the heart of downtown Richmond's
         Financial District. Originally built in 1914 and renovated in 2006, the building offers
-        walk-everywhere convenience — Walk Score 97 — with the Virginia State Capitol, VCU Health,
+        walk-everywhere convenience — <a
+          href="https://www.walkscore.com/score/6-n-6th-st-richmond-va-23219"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-accent/40 underline-offset-4 hover:text-accent"
+          >Walk Score 96</a
+        > — with the Virginia State Capitol, VCU Health,
         the Federal Reserve, Dominion Energy, and the city's best restaurants and theaters all
         within blocks.
       </p>
@@ -97,14 +107,28 @@ const personas = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
         {
-          stats.map((stat) => (
-            <div class="text-center">
-              <p class="font-serif text-4xl text-primary md:text-5xl">{stat.value}</p>
-              <p class="mt-2 text-sm tracking-wide text-muted-foreground uppercase">
-                {stat.label}
-              </p>
-            </div>
-          ))
+          stats.map((stat) =>
+            stat.href ? (
+              <a
+                href={stat.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block text-center transition-colors hover:text-accent"
+              >
+                <p class="font-serif text-4xl text-primary md:text-5xl">{stat.value}</p>
+                <p class="mt-2 text-sm tracking-wide text-muted-foreground uppercase">
+                  {stat.label}
+                </p>
+              </a>
+            ) : (
+              <div class="text-center">
+                <p class="font-serif text-4xl text-primary md:text-5xl">{stat.value}</p>
+                <p class="mt-2 text-sm tracking-wide text-muted-foreground uppercase">
+                  {stat.label}
+                </p>
+              </div>
+            )
+          )
         }
       </div>
     </div>
