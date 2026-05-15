@@ -1,37 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Imbue", ui-serif, Georgia, serif;
-  --radius: 0;
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-serif: "Imbue", ui-serif, Georgia, serif;
+    --radius: 0;
 
-  --color-background: hsl(37 36% 93%);
-  --color-foreground: hsl(0 0% 4%);
-  --color-border: hsl(37 15% 85%);
-  --color-card: hsl(37 36% 95%);
-  --color-card-foreground: hsl(0 0% 4%);
-  --color-primary: hsl(0 0% 4%);
-  --color-primary-foreground: hsl(37 36% 93%);
-  --color-secondary: hsl(37 20% 88%);
-  --color-secondary-foreground: hsl(0 0% 4%);
-  --color-muted: hsl(47 58% 77%);
-  --color-muted-foreground: hsl(0 0% 30%);
-  --color-accent: hsl(44 53% 54%);
-  --color-accent-foreground: hsl(0 0% 4%);
-  --color-input: hsl(37 15% 80%);
-  --color-ring: hsl(44 53% 54%);
+    --color-background: hsl(37 36% 93%);
+    --color-foreground: hsl(0 0% 4%);
+    --color-border: hsl(37 15% 85%);
+    --color-card: hsl(37 36% 95%);
+    --color-card-foreground: hsl(0 0% 4%);
+    --color-primary: hsl(0 0% 4%);
+    --color-primary-foreground: hsl(37 36% 93%);
+    --color-secondary: hsl(37 20% 88%);
+    --color-secondary-foreground: hsl(0 0% 4%);
+    --color-muted: hsl(47 58% 77%);
+    --color-muted-foreground: hsl(0 0% 30%);
+    --color-accent: hsl(44 53% 54%);
+    --color-accent-foreground: hsl(0 0% 4%);
+    --color-input: hsl(37 15% 80%);
+    --color-ring: hsl(44 53% 54%);
 }
 
 @layer base {
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-  }
+    body {
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-serif);
+        font-weight: 400;
+    }
 }

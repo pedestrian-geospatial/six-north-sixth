@@ -1,184 +1,197 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const base = import.meta.env.BASE_URL;
 
-const distances = [
-  { name: 'Sefton Coffee', time: '2 min' },
-  { name: 'Virginia State Capitol', time: '3 min' },
-  { name: 'Richmond City Hall', time: '3 min' },
-  { name: 'Capital Ale House', time: '4 min' },
-  { name: 'Dominion Energy Center (theater)', time: '4 min' },
-  { name: 'Truist Bank Downtown', time: '4 min' },
-  { name: 'Dominion Energy HQ', time: '5 min' },
-  { name: 'Federal Reserve Bank', time: '8 min' },
-  { name: 'MCV Campus', time: '8 min' },
-  { name: "Brown's Island / Canal Walk", time: '8 min' },
-  { name: 'VCU Medical Center', time: '10–12 min' },
-  { name: 'Main Street Station (Amtrak)', time: '12 min' },
-];
-
 const unitMix = [
-  { type: '1 BR', size: '~986 sq ft', layout: '1 BR / 1.5 BA' },
-  { type: '2 BR', size: '~1,200–1,243 sq ft', layout: '2 BR / 2 BA' },
-  { type: '2 BR top floor', size: '1,258 sq ft', layout: '2 BR / 2 BA — largest in building' },
+    { type: "1 BR", size: "~986 sq ft", layout: "1 BR / 1.5 BA" },
+    { type: "2 BR", size: "~1,200–1,243 sq ft", layout: "2 BR / 2 BA" },
+    {
+        type: "2 BR top floor",
+        size: "1,258 sq ft",
+        layout: "2 BR / 2 BA — largest in building",
+    },
 ];
 
 const hoaIncludes = [
-  'Water',
-  'Gas',
-  'Sewer',
-  'Trash',
-  'Internet',
-  'Telephone',
-  'Liability insurance',
-  'Management',
-  'Common-area maintenance',
-  'Fire alarm monitoring',
-  'Elevator maintenance',
+    "Water",
+    "Gas",
+    "Sewer",
+    "Trash",
+    "Internet",
+    "Liability insurance",
+    "Management",
+    "Common-area maintenance",
+    "Fire alarm monitoring",
+    "Elevator maintenance",
 ];
 ---
 
 <Layout
-  title="For Buyers & Agents"
-  description="Distances, unit mix, HOA inclusions, and policies for prospective buyers and agents at 6 North 6th Street."
+    title="For Buyers & Agents"
+    description="Unit mix, HOA inclusions, and policies for prospective buyers and agents at 6 North 6th Street."
 >
-  <section
-    class="relative flex min-h-[60vh] items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8"
-  >
-    <img
-      alt="Sidewalk view of 6 North 6th Street with awnings and downtown Richmond skyline"
-      class="absolute inset-0 h-full w-full object-cover"
-      loading="eager"
-      src={`${base}images/6n6_1778034429152-DgsXALRr.webp`}
-    />
-    <div class="absolute inset-0 bg-background/70"></div>
-    <div class="relative z-10 mx-auto max-w-3xl">
-      <h1 class="mb-6 font-serif text-4xl text-primary md:text-5xl">For Buyers &amp; Agents</h1>
-      <p class="mx-auto mb-8 max-w-2xl text-muted-foreground">
-        6 North 6th Street is functionally one of the most centrally located condo buildings in
-        Richmond. It sits in the middle of Richmond's downtown employment core, within walking
-        distance of the state government, the Federal Reserve's Fifth District headquarters, a
-        major academic medical center, and several Fortune 500 corporate headquarters.
-      </p>
-      <a
-        href={`${base}6N6_Buyer_Info_Sheet.pdf`}
-        target="_blank"
-        rel="noopener noreferrer"
-        download
-        class="inline-flex min-h-9 items-center justify-center gap-2 border border-primary bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
+    <section
+        class="relative flex min-h-[60vh] items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8"
+    >
+        <img
+            alt="Sidewalk view of 6 North 6th Street with awnings and downtown Richmond skyline"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+            src={`${base}images/6n6_1778034429152-DgsXALRr.webp`}
+        />
+        <div class="absolute inset-0 bg-background/70"></div>
+        <div class="relative z-10 mx-auto max-w-3xl">
+            <h1 class="mb-6 font-serif text-4xl text-primary md:text-5xl">
+                For Buyers &amp; Agents
+            </h1>
+            <p class="mx-auto mb-8 max-w-2xl text-muted-foreground">
+                6 North 6th Street is functionally one of the most centrally
+                located condo buildings in Richmond. It sits in the middle of
+                Richmond's downtown employment core, within walking distance of
+                the state government, the Federal Reserve's Fifth District
+                headquarters, a major academic medical center, and several
+                Fortune 500 corporate headquarters.
+            </p>
+            <a
+                href={`${base}6N6_Buyer_Info_Sheet.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                class="inline-flex min-h-9 items-center justify-center gap-2 border border-primary bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M12 15V3"></path>
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <path d="m7 10 5 5 5-5"></path>
+                </svg>
+                Building Info Sheet (PDF)
+            </a>
+        </div>
+    </section>
+
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+        <div class="mb-20 flex flex-col gap-12 md:flex-row">
+            <div class="flex-1 space-y-12">
+                <div>
+                    <h2 class="mb-6 font-serif text-2xl text-primary">
+                        Unit Mix
+                    </h2>
+                    <div class="overflow-auto border border-border bg-card">
+                        <table class="w-full text-sm">
+                            <thead class="bg-secondary/50">
+                                <tr class="border-b border-border">
+                                    <th
+                                        class="h-10 px-2 text-left font-semibold text-primary"
+                                        >Type</th
+                                    >
+                                    <th
+                                        class="h-10 px-2 text-left font-semibold text-primary"
+                                        >Size</th
+                                    >
+                                    <th
+                                        class="h-10 px-2 text-left font-semibold text-primary"
+                                        >Layout</th
+                                    >
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    unitMix.map((u) => (
+                                        <tr class="border-b border-border last:border-0">
+                                            <td class="p-2">{u.type}</td>
+                                            <td class="p-2">{u.size}</td>
+                                            <td class="p-2">{u.layout}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="mb-6 font-serif text-2xl text-primary">
+                        Unit Finishes
+                    </h2>
+                    <p class="leading-relaxed text-muted-foreground">
+                        While each unit has unique characteristics, typical
+                        finishes include hardwood floors in living areas, tile
+                        floors at entry and kitchen, granite countertops,
+                        stainless steel appliances, and custom cabinets. Many
+                        units feature recessed lighting, electric or gas
+                        fireplaces, walk-in closets in primary bedrooms, double
+                        vanities and soaking tubs, and stackable in-unit
+                        washer/dryers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex-1 space-y-12">
+                <div>
+                    <h2 class="mb-6 font-serif text-2xl text-primary">
+                        HOA Fee Includes
+                    </h2>
+                    <p class="mb-3 text-sm text-muted-foreground">
+                        The monthly HOA fee covers a generous list of services
+                        that would otherwise be paid separately:
+                    </p>
+                    <ul
+                        class="grid grid-cols-2 gap-x-6 gap-y-2 border-l border-accent pl-4 text-sm text-muted-foreground"
+                    >
+                        {hoaIncludes.map((item) => <li>{item}</li>)}
+                    </ul>
+                    <p class="mt-4 text-xs text-muted-foreground italic">
+                        Verify the current HOA fee with the management company.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="mb-6 font-serif text-2xl text-primary">
+                        Policies
+                    </h2>
+                    <ul
+                        class="space-y-3 border-l border-accent pl-4 text-muted-foreground"
+                    >
+                        <li>
+                            <strong>Pets:</strong> Up to 3 pets (cats/dogs combined)
+                            per unit
+                        </li>
+                        <li>
+                            <strong>Rentals:</strong> Minimum 3-month rental term
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-xs text-muted-foreground italic">
+                        Verify with current HOA documents.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="mx-auto max-w-xl border border-border bg-secondary/30 p-8 text-center"
         >
-          <path d="M12 15V3"></path>
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <path d="m7 10 5 5 5-5"></path>
-        </svg>
-        Building Info Sheet (PDF)
-      </a>
+            <h2 class="mb-2 font-serif text-2xl text-primary">
+                Request More Info
+            </h2>
+            <p class="text-sm text-muted-foreground">
+                For general building information, contact Amber Chadil at
+                <a
+                    href="mailto:amber@acswest.org"
+                    class="text-primary hover:text-accent">amber@acswest.org</a
+                >.
+            </p>
+        </div>
     </div>
-  </section>
-
-  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-    <div class="mb-20 grid gap-12 md:grid-cols-2">
-      <div>
-        <h2 class="mb-6 font-serif text-2xl text-primary">Walking Distances</h2>
-        <div class="overflow-auto border border-border bg-card">
-          <table class="w-full text-sm">
-            <thead class="bg-secondary/50">
-              <tr class="border-b border-border">
-                <th class="h-10 px-2 text-left font-semibold text-primary">Destination</th>
-                <th class="h-10 px-2 text-right font-semibold text-primary">Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                distances.map((d) => (
-                  <tr class="border-b border-border last:border-0">
-                    <td class="p-2">{d.name}</td>
-                    <td class="p-2 text-right">{d.time}</td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="space-y-12">
-        <div>
-          <h2 class="mb-6 font-serif text-2xl text-primary">Unit Mix</h2>
-          <div class="overflow-auto border border-border bg-card">
-            <table class="w-full text-sm">
-              <thead class="bg-secondary/50">
-                <tr class="border-b border-border">
-                  <th class="h-10 px-2 text-left font-semibold text-primary">Type</th>
-                  <th class="h-10 px-2 text-left font-semibold text-primary">Size</th>
-                  <th class="h-10 px-2 text-left font-semibold text-primary">Layout</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  unitMix.map((u) => (
-                    <tr class="border-b border-border last:border-0">
-                      <td class="p-2">{u.type}</td>
-                      <td class="p-2">{u.size}</td>
-                      <td class="p-2">{u.layout}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div>
-          <h2 class="mb-6 font-serif text-2xl text-primary">HOA Fee Includes</h2>
-          <p class="mb-3 text-sm text-muted-foreground">
-            The monthly HOA fee covers a generous list of services that would otherwise be paid
-            separately:
-          </p>
-          <ul
-            class="grid grid-cols-2 gap-x-6 gap-y-2 border-l border-accent pl-4 text-sm text-muted-foreground"
-          >
-            {hoaIncludes.map((item) => <li>{item}</li>)}
-          </ul>
-          <p class="mt-4 text-xs text-muted-foreground italic">
-            Verify the current HOA fee with the management company.
-          </p>
-        </div>
-
-        <div>
-          <h2 class="mb-6 font-serif text-2xl text-primary">Policies</h2>
-          <ul class="space-y-3 border-l border-accent pl-4 text-muted-foreground">
-            <li><strong>Pets:</strong> Up to 3 pets (cats/dogs combined) per unit</li>
-            <li><strong>Rentals:</strong> Minimum 3-month rental term</li>
-          </ul>
-          <p class="mt-4 text-xs text-muted-foreground italic">
-            Verify with current HOA documents.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="mx-auto max-w-xl border border-border bg-secondary/30 p-8 text-center">
-      <h2 class="mb-2 font-serif text-2xl text-primary">Request More Info</h2>
-      <p class="text-sm text-muted-foreground">
-        For general building information, contact Amber Chadil at
-        <a href="mailto:amber@acswest.org" class="text-primary hover:text-accent"
-          >amber@acswest.org</a
-        >.
-      </p>
-    </div>
-  </div>
 </Layout>
