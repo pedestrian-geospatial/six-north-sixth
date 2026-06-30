@@ -1591,6 +1591,20 @@
         "osm_id": "n846282134",
         "osm_name": "Urban Farmhouse Market & Cafe"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-77.4428442, 37.5420008]
+      },
+      "properties": {
+        "name": "Pi's Coffee",
+        "cat": "cafe",
+        "addr": "123 E Main St · Indian café",
+        "osm_id": "n12554835627",
+        "osm_name": "Pi's Coffee"
+      }
     }
   ]
 }
