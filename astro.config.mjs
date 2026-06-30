@@ -1,10 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: 'https://pedestrian-geospatial.github.io',
-  trailingSlash: 'always',
+  site: "https://6north6thstreet.com/",
+  trailingSlash: "always",
   vite: {
     plugins: [tailwindcss()],
   },
